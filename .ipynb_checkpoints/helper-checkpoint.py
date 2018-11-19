@@ -102,7 +102,7 @@ def parse_datadict():
                     # until it reaches a row with dashes
                     if row_desc == '-----': break
                     # if else goes wrong avoid infinite loop
-                    if j > 20: break
+                    if j > 30: break
 
                     k = 1
                     row_full_desc = []

@@ -102,7 +102,8 @@ def parse_datadict():
                     # until it reaches a row with dashes
                     if row_desc == '-----': break
                     # if else goes wrong avoid infinite loop
-                    if j > 30: break
+                    if j > 30: 
+                        break
 
                     k = 1
                     row_full_desc = []
@@ -154,6 +155,7 @@ def parse_datadict():
                                 value_map['value_key'].append(value_key)
                                 value_map['ValueMaps'].append(value_name)
                             except:
+                                #if value_key == 'ERL':
                                 #print('key', row_key,'val_key:', value_key,'value:', value_name)
                                 column_meta['key'].append(row_key)
                                 column_meta['ColumnShortName'].append(value_key)
@@ -171,3 +173,5 @@ def parse_datadict():
         df_column_meta = pd.DataFrame(column_meta)
         
     return df_colname, df_column_description, df_value_map, df_column_meta 
+
+df1, df2, df3, df4 = parse_datadict()
