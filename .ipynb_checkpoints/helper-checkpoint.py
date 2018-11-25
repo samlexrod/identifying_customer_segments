@@ -2,6 +2,31 @@ from csv import DictReader
 import numpy as np
 import pandas as pd
 import re
+import matplotlib.pyplot as plt
+
+def pca_results(full_dataset, pca):
+	'''
+	Create a DataFrame of the PCA results
+	Includes dimension feature weights and explained variance
+	Visualizes the PCA results
+	'''
+
+	# Dimension indexing
+	dimensions = dimensions = ['Dimension {}'.format(i) for i in range(1,len(pca.components_)+1)]
+
+	# PCA components
+	components = pd.DataFrame(np.round(pca.components_, 4), columns = full_dataset.keys())
+	components.index = dimensions
+
+	# PCA explained variance
+	ratios = pca.explained_variance_ratio_.reshape(len(pca.components_), 1)
+	variance_ratios = pd.DataFrame(np.round(ratios, 4), columns = ['Explained Variance'])
+	variance_ratios.index = dimensions
+
+	# Return a concatenated DataFrame
+	return pd.concat([variance_ratios, components], axis = 1)
+
+
 
 def parse_datadict():
     dd = open('Data_Dictionary.md', 'rt')
